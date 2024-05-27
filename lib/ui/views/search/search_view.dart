@@ -20,6 +20,9 @@ class SearchView extends StackedView<SearchViewModel> {
       body: Column(
         children: [
           TextField(
+            onSubmitted: (value) {
+              viewModel.addTag(value);
+            },
             decoration: InputDecoration(
               suffixIcon: IconButton(
                 onPressed: () {
@@ -31,7 +34,7 @@ class SearchView extends StackedView<SearchViewModel> {
             controller: viewModel.searchController,
           ),
           Row(
-            children: viewModel.searchTags.toList(),
+            children: viewModel.searchTags,
           ),
         ],
       ),

@@ -8,24 +8,29 @@ final _apiService = locator<ApiService>();
 
 class SearchViewModel extends BaseViewModel {
   final genreList = _apiService.genres;
-  final searchTags = <SearchTag>{
-    SearchTag(
-      tagName: 'Hello1',
-      delete: (String name) {},
-    )
-  };
+  var searchTags = <SearchTag>[];
+
   final TextEditingController searchController = TextEditingController();
+
   void search() {
     final String text = searchController.text;
     if (genreList.containsKey(text)) {}
   }
 
-  // void addTag(String tagName) {
-  //   SearchTag sw = SearchTag(tagName: tagName, delete: delete);
-  //   searchTags.add(sw);
-  // }
+  void addTag(String tagName) async {
+    SearchTag sw =
+        SearchTag(tagName: tagName, delete: () => deleteTag(tagName));
+    searchController.text = "";
+    searchTags.add(sw);
+    notifyListeners();
+    await Future.delayed(Duration(seconds: 3));
+    searchTags.remove(tagName);
+    notifyListeners();
+  }
 
-  void delete(String name) {
-    searchTags.remove(name);
+  void deleteTag(String name) {
+    searchTags =
+        searchTags.where((searchTag) => searchTag.tagName != name).toList();
+    notifyListeners();
   }
 }
