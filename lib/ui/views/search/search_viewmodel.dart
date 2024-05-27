@@ -18,6 +18,7 @@ class SearchViewModel extends BaseViewModel {
   }
 
   void addTag(String tagName) {
+    if (!genreList.containsKey(tagName)) return;
     SearchTag sw =
         SearchTag(tagName: tagName, delete: () => deleteTag(tagName));
     searchController.text = "";
