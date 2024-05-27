@@ -25,7 +25,7 @@ class ApiService {
     var res = await dio.get('/3/genre/movie/list');
 
     for (var mapItem in res.data['genres']) {
-      genres[mapItem['name']] = mapItem['id'];
+      genres[mapItem['name'].toString().toLowerCase()] = mapItem['id'];
     }
     print(genres);
   }
