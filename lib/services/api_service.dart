@@ -29,4 +29,10 @@ class ApiService {
     }
     print(genres);
   }
+
+  Future<void> searchWithGenre(List<dynamic> queries) async {
+    String api_url = '/3/discover/movie?with_genres=${queries.join('&')}';
+    var res = await dio.get(api_url);
+    print(res);
+  }
 }

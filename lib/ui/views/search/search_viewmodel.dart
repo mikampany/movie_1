@@ -8,13 +8,15 @@ final _apiService = locator<ApiService>();
 
 class SearchViewModel extends BaseViewModel {
   final genreList = _apiService.genres;
-  var searchTags = <SearchTag>[];
+  List<SearchTag> searchTags = <SearchTag>[];
 
   final TextEditingController searchController = TextEditingController();
 
-  void search() {
-    final String text = searchController.text;
-    if (genreList.containsKey(text)) {}
+  void searchWithGenre() async {
+    if (searchTags.isEmpty) return;
+    var res = await _apiService.searchWithGenre(
+        searchTags.map((searchTag) => genreList[searchTag.tagName]).toList());
+    print(res);
   }
 
   void addTag(String tagName) {

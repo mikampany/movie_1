@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie/ui/views/results/results_view.dart';
 import 'package:stacked/stacked.dart';
 
 import 'search_viewmodel.dart';
@@ -26,7 +25,7 @@ class SearchView extends StackedView<SearchViewModel> {
             decoration: InputDecoration(
               suffixIcon: IconButton(
                 onPressed: () {
-                  viewModel.search();
+                  viewModel.searchWithGenre();
                 },
                 icon: const Icon(Icons.search),
               ),
