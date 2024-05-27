@@ -16,7 +16,6 @@ class SearchViewModel extends BaseViewModel {
     if (searchTags.isEmpty) return;
     var res = await _apiService.searchWithGenre(
         searchTags.map((searchTag) => genreList[searchTag.tagName]).toList());
-    print(res);
   }
 
   void addTag(String tagName) {
