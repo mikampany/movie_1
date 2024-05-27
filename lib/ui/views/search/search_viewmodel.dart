@@ -17,14 +17,11 @@ class SearchViewModel extends BaseViewModel {
     if (genreList.containsKey(text)) {}
   }
 
-  void addTag(String tagName) async {
+  void addTag(String tagName) {
     SearchTag sw =
         SearchTag(tagName: tagName, delete: () => deleteTag(tagName));
     searchController.text = "";
     searchTags.add(sw);
-    notifyListeners();
-    await Future.delayed(Duration(seconds: 3));
-    searchTags.remove(tagName);
     notifyListeners();
   }
 
