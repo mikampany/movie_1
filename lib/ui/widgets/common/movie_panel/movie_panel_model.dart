@@ -11,7 +11,7 @@ class MoviePanelModel extends BaseViewModel {
   final String? imgSrc;
   final String? overview;
   final genreMap = _apiService.genres;
-  get genres => genreIds.map((id) => _apiService.genres[id]).toList();
+
 
   MoviePanelModel(
       {required this.title,
