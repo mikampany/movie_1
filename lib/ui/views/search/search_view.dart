@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie/ui/smol_widgets/movie_list.dart';
+import 'package:movie/ui/widgets/common/movie_panel/movie_panel.dart';
 import 'package:stacked/stacked.dart';
 
 import 'search_viewmodel.dart';
@@ -35,6 +37,12 @@ class SearchView extends StackedView<SearchViewModel> {
           Row(
             children: viewModel.searchTags,
           ),
+          // if (viewModel.movies.isNotEmpty) MovieList(movies: viewModel.movies)
+          const MoviePanel(
+            id: 1,
+            title: 'Hello1',
+            genreIds: [16, 35],
+          )
         ],
       ),
     );

@@ -26,7 +26,7 @@ class LoginView extends StackedView<LoginViewModel> {
                 Text('Login'),
               ],
             );
-          }else{
+          } else {
             return const Center(
               child: CircularProgressIndicator(),
             );

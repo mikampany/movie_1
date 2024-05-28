@@ -8,6 +8,7 @@ import 'package:movie/ui/views/results/results_view.dart';
 import 'package:movie/ui/views/search/search_view.dart';
 import 'package:movie/ui/views/login/login_view.dart';
 import 'package:movie/ui/views/sign_up/sign_up_view.dart';
+
 // @stacked-import
 
 @StackedApp(
