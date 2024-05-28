@@ -13,7 +13,6 @@ class MoviePanelModel extends BaseViewModel {
   final String? overview;
   final genreMap = _apiService.genres;
 
-
   MoviePanelModel(
       {required this.title,
       required this.id,

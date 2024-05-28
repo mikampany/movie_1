@@ -9,7 +9,7 @@ import 'package:flutter/material.dart' as _i9;
 import 'package:flutter/material.dart';
 import 'package:movie/ui/views/home/home_view.dart' as _i2;
 import 'package:movie/ui/views/login/login_view.dart' as _i6;
-
+import 'package:movie/ui/views/movie_page/movie_page_view.dart' as _i8;
 import 'package:movie/ui/views/results/results_view.dart' as _i4;
 import 'package:movie/ui/views/search/search_view.dart' as _i5;
 import 'package:movie/ui/views/sign_up/sign_up_view.dart' as _i7;
@@ -30,7 +30,7 @@ class Routes {
 
   static const signUpView = '/sign-up-view';
 
-  static const movieListView = '/movie-list-view';
+  static const moviePageView = '/movie-page-view';
 
   static const all = <String>{
     homeView,
@@ -39,7 +39,7 @@ class Routes {
     searchView,
     loginView,
     signUpView,
-    movieListView,
+    moviePageView,
   };
 }
 
@@ -68,6 +68,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.signUpView,
       page: _i7.SignUpView,
+    ),
+    _i1.RouteDef(
+      Routes.moviePageView,
+      page: _i8.MoviePageView,
     ),
   ];
 
@@ -105,6 +109,12 @@ class StackedRouter extends _i1.RouterBase {
     _i7.SignUpView: (data) {
       return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.SignUpView(),
+        settings: data,
+      );
+    },
+    _i8.MoviePageView: (data) {
+      return _i9.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i8.MoviePageView(),
         settings: data,
       );
     },
@@ -202,14 +212,14 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToMovieListView([
+  Future<dynamic> navigateToMoviePageView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.movieListView,
+    return navigateTo<dynamic>(Routes.moviePageView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -300,14 +310,14 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithMovieListView([
+  Future<dynamic> replaceWithMoviePageView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.movieListView,
+    return replaceWith<dynamic>(Routes.moviePageView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
