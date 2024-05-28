@@ -37,12 +37,7 @@ class SearchView extends StackedView<SearchViewModel> {
           Row(
             children: viewModel.searchTags,
           ),
-          // if (viewModel.movies.isNotEmpty) MovieList(movies: viewModel.movies)
-          const MoviePanel(
-            id: 1,
-            title: 'Hello1',
-            genreIds: [16, 35],
-          )
+          if (viewModel.movies.isNotEmpty) MovieList(movies: viewModel.movies)
         ],
       ),
     );
