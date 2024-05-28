@@ -6,7 +6,7 @@ import 'package:movie/models/tmdb/tmdb_movies_response.dart';
 final String _API_ACCESS_TOKEN =
     'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNTMxOTk1MmRkZmY1OTMyYjk3MGM4NWVkYTYwYmNiNiIsInN1YiI6IjY2NTQwYWNkZTA5OTk4NjM2YjRjZDI1MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lJtYvX_j1nAGaebMv9XQwQIQFU5T3jDRqCYSlAcFS-o';
 
-const String imgUrl = 'http://image.tmdb.org/t/p/';
+const String imgUrl = 'http://image.tmdb.org/t/p/w500';
 
 class ApiService {
   final dio = Dio(
@@ -47,5 +47,12 @@ class ApiService {
     var res = await dio.get(apiUrl);
 
     return TMDBMoviesResponse.fromJson(res.data);
+  }
+
+  String getImgSrc(String? posterPath) {
+    if (posterPath == null) {
+      return 'https://th.bing.com/th/id/OIP.hMlLJSmMJky9Rd1JwB86VgHaFl?rs=1&pid=ImgDetMain';
+    }
+    return imgUrl + posterPath;
   }
 }

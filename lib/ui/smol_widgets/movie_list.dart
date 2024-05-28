@@ -10,13 +10,16 @@ class MovieList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Text> movieList = movies.map((movie) => Text(movie.title)).toList();
     List<MoviePanel> moviePanels = movies
-        .map((movie) => MoviePanel(
+        .map(
+          (movie) => MoviePanel(
               id: movie.id,
               title: movie.title,
               genreIds: movie.genreIds ?? [],
-            ))
+              overview: movie.overview,
+              posterPath: movie.posterPath),
+        )
         .toList();
-    // print(movieList);
+
     return Column(
       children: moviePanels,
     );

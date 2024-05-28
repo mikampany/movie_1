@@ -19,7 +19,6 @@ class SearchViewModel extends BaseViewModel {
     var res = await _apiService.searchWithGenre(
         searchTags.map((searchTag) => genreList[searchTag.tagName]).toList());
     movies = res.results;
-    print(movies);
     notifyListeners();
   }
 

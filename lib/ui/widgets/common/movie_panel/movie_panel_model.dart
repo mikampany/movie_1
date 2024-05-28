@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:movie/app/app.locator.dart';
 import 'package:movie/services/api_service.dart';
 import 'package:stacked/stacked.dart';
@@ -8,7 +9,7 @@ class MoviePanelModel extends BaseViewModel {
   final String title;
   final int id;
   final List<int> genreIds;
-  final String? imgSrc;
+  final String? posterPath;
   final String? overview;
   final genreMap = _apiService.genres;
 
@@ -16,7 +17,14 @@ class MoviePanelModel extends BaseViewModel {
   MoviePanelModel(
       {required this.title,
       required this.id,
-      this.imgSrc,
+      this.posterPath,
       this.genreIds = const [],
       this.overview});
+
+  String get imgSrc => _apiService.getImgSrc(posterPath);
+
+  Image posterImage() {
+    Image img = Image(image: NetworkImage(imgSrc));
+    return img;
+  }
 }
