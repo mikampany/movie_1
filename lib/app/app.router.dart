@@ -114,7 +114,9 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i8.MoviePageView: (data) {
       return _i9.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i8.MoviePageView(),
+        builder: (context) => const _i8.MoviePageView(
+          id: 0,
+        ),
         settings: data,
       );
     },
