@@ -27,13 +27,13 @@ class MoviePanel extends StackedView<MoviePanelModel> {
     print("Genres: ${viewModel.genres}");
     return GestureDetector(
       onTap: () {},
-      child: Expanded(
-        child: Column(
+      child: 
+         Column(
           children: [
             Text('No.:$id Title:$title'),
-            
+
           ],
-        ),
+      
       ),
     );
   }
