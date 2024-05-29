@@ -22,6 +22,20 @@ class SearchViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void searchWithQuery() async {
+    var res = await _apiService.searchByQuery(query: searchController.text);
+    movies = res.results;
+    notifyListeners();
+  }
+
+  void search() async {
+    if (searchController.text.isNotEmpty) {
+      searchWithQuery();
+    } else {
+      searchWithGenre();
+    }
+  }
+
   void addTag(String tagName) {
     if (!genreList.containsKey(tagName.toLowerCase())) return;
     SearchTag sw =

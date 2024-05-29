@@ -36,7 +36,7 @@ class SearchView extends StackedView<SearchViewModel> {
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
                     onPressed: () {
-                      viewModel.searchWithGenre();
+                      viewModel.search();
                     },
                     icon: const Icon(Icons.search),
                   ),

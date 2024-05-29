@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:movie/app/app.locator.dart';
 import 'package:movie/services/api_service.dart';
 import 'package:stacked/stacked.dart';

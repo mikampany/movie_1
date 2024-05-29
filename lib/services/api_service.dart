@@ -62,4 +62,13 @@ class ApiService {
     var res = await dio.get(apiUrl);
     return TMDBMovieBasic.fromJson(res.data);
   }
+
+  Future<TMDBMoviesResponse> searchByQuery({required String query}) async {
+    String apiUrl = Uri.encodeFull('/3/search/movie?query=$query');
+    print(apiUrl);
+    var res = await dio.get(
+      apiUrl,
+    );
+    return TMDBMoviesResponse.fromJson(res.data);
+  }
 }

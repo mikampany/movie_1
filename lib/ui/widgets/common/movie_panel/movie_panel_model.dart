@@ -16,4 +16,5 @@ class MoviePanelModel extends BaseViewModel {
 
     _navigationService.clearTillFirstAndShowView(MoviePageView(movie: movie));
   }
+
 }
