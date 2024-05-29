@@ -1,36 +1,25 @@
 import 'package:movie/app/app.bottomsheets.dart';
 import 'package:movie/app/app.dialogs.dart';
 import 'package:movie/app/app.locator.dart';
+import 'package:movie/models/tmdb/tmdb_movie_basic.dart';
+import 'package:movie/services/api_service.dart';
 import 'package:movie/ui/common/app_strings.dart';
+import 'package:movie/ui/smol_widgets/movie_list.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+final _apiService = locator<ApiService>();
+
 class HomeViewModel extends BaseViewModel {
-  final _dialogService = locator<DialogService>();
-  final _bottomSheetService = locator<BottomSheetService>();
+  List<TMDBMovieBasic> movies = [];
 
-  String get counterLabel => 'Counter is: $_counter';
-
-  int _counter = 0;
-
-  void incrementCounter() {
-    _counter++;
-    rebuildUi();
+  Future popularMovies() async {
+    var res = await _apiService.popularMovies();
+    movies = res.results;
+    notifyListeners();
   }
 
-  void showDialog() {
-    _dialogService.showCustomDialog(
-      variant: DialogType.infoAlert,
-      title: 'Stacked Rocks!',
-      description: 'Give stacked $_counter stars on Github',
-    );
-  }
-
-  void showBottomSheet() {
-    _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: ksHomeBottomSheetTitle,
-      description: ksHomeBottomSheetDescription,
-    );
+  runStartupLogic() async {
+    await popularMovies();
   }
 }

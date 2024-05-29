@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:movie/models/tmdb/tmdb_movie_basic.dart';
 import 'package:movie/models/tmdb/tmdb_movies_response.dart';
 
 final String _API_ACCESS_TOKEN =
     'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNTMxOTk1MmRkZmY1OTMyYjk3MGM4NWVkYTYwYmNiNiIsInN1YiI6IjY2NTQwYWNkZTA5OTk4NjM2YjRjZDI1MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lJtYvX_j1nAGaebMv9XQwQIQFU5T3jDRqCYSlAcFS-o';
 
-const String imgUrl = 'http://image.tmdb.org/t/p/w500';
+const String imgUrl = 'http://image.tmdb.org/t/p/original';
 
 class ApiService {
   final dio = Dio(
@@ -54,5 +55,11 @@ class ApiService {
       return 'https://th.bing.com/th/id/OIP.hMlLJSmMJky9Rd1JwB86VgHaFl?rs=1&pid=ImgDetMain';
     }
     return imgUrl + posterPath;
+  }
+
+  Future<TMDBMovieBasic> findMovieById(id) async {
+    var apiUrl = '/3/movie/$id?language=en-US';
+    var res = await dio.get(apiUrl);
+    return TMDBMovieBasic.fromJson(res.data);
   }
 }

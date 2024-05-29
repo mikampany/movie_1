@@ -113,10 +113,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i8.MoviePageView: (data) {
+      final args = data.getArgs<MoviePageViewArguments>(nullOk: false);
       return _i9.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i8.MoviePageView(
-          id: 0,
-        ),
+        builder: (context) =>
+            _i8.MoviePageView(key: args.key, movie: args.movie),
         settings: data,
       );
     },
@@ -127,6 +127,33 @@ class StackedRouter extends _i1.RouterBase {
 
   @override
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
+}
+
+class MoviePageViewArguments {
+  const MoviePageViewArguments({
+    this.key,
+    required this.movie,
+  });
+
+  final _i9.Key? key;
+
+  final dynamic movie;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "movie": "$movie"}';
+  }
+
+  @override
+  bool operator ==(covariant MoviePageViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.movie == movie;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ movie.hashCode;
+  }
 }
 
 extension NavigatorStateExtension on _i10.NavigationService {
@@ -214,14 +241,17 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToMoviePageView([
+  Future<dynamic> navigateToMoviePageView({
+    _i9.Key? key,
+    required dynamic movie,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.moviePageView,
+        arguments: MoviePageViewArguments(key: key, movie: movie),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -312,14 +342,17 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithMoviePageView([
+  Future<dynamic> replaceWithMoviePageView({
+    _i9.Key? key,
+    required dynamic movie,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.moviePageView,
+        arguments: MoviePageViewArguments(key: key, movie: movie),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

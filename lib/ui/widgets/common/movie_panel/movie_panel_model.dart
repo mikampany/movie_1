@@ -1,29 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:movie/app/app.locator.dart';
+import 'package:movie/app/app.router.dart';
 import 'package:movie/services/api_service.dart';
+import 'package:movie/ui/views/movie_page/movie_page_view.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 final _apiService = locator<ApiService>();
+final _navigationService = locator<NavigationService>();
 
 class MoviePanelModel extends BaseViewModel {
-  final String title;
-  final int id;
-  final List<int> genreIds;
-  final String? posterPath;
-  final String? overview;
-  final genreMap = _apiService.genres;
 
-  MoviePanelModel(
-      {required this.title,
-      required this.id,
-      this.posterPath,
-      this.genreIds = const [],
-      this.overview});
+  Future navigateToMoviePage({required id}) async {
+    var movie = await _apiService.findMovieById(id);
 
-  String get imgSrc => _apiService.getImgSrc(posterPath);
-
-  Image posterImage() {
-    Image img = Image(image: NetworkImage(imgSrc));
-    return img;
+    _navigationService.clearTillFirstAndShowView(MoviePageView(movie: movie));
   }
 }

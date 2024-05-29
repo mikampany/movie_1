@@ -1,18 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:movie/app/app.locator.dart';
+import 'package:movie/app/app.router.dart';
+import 'package:movie/services/api_service.dart';
+import 'package:movie/ui/smol_widgets/movie_list.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import 'home_viewmodel.dart';
 
+final _navigationService = locator<NavigationService>();
+final _apiService = locator<ApiService>();
+
 class HomeView extends StackedView<HomeViewModel> {
   const HomeView({Key? key}) : super(key: key);
-
+  final int id = 69;
   @override
   Widget builder(
     BuildContext context,
     HomeViewModel viewModel,
     Widget? child,
   ) {
-    return const Text('Home View');
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Movie database'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            FloatingActionButton.large(
+              onPressed: () =>
+                  _navigationService.replaceWithSearchView(),
+              child: const Text('Search'),
+            ),
+            MovieList(movies: viewModel.movies),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -20,4 +45,8 @@ class HomeView extends StackedView<HomeViewModel> {
     BuildContext context,
   ) =>
       HomeViewModel();
+
+  @override
+  void onViewModelReady(HomeViewModel viewModel) => SchedulerBinding.instance
+      .addPostFrameCallback((timeStamp) => viewModel.runStartupLogic());
 }

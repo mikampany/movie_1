@@ -28,25 +28,33 @@ class MoviePanel extends StackedView<MoviePanelModel> {
   ) {
     final _apiService = locator<ApiService>();
     return GestureDetector(
-      onTap: () {},
-      child: Column(
-        children: [
-          Image(
-            image: NetworkImage(
-              _apiService.getImgSrc(posterPath),
+      onTap: () async {
+        await viewModel.navigateToMoviePage(id: id);
+      },
+      child: viewModel.isBusy
+          ? const SizedBox(
+              height: 500,
+              width: 500,
+              child: CircularProgressIndicator(),
+            )
+          : Column(
+              children: [
+                Image(
+                  image: NetworkImage(
+                    _apiService.getImgSrc(posterPath),
+                  ),
+                ),
+                // Text('Title:$title'),
+                // SizedBox(
+                //     height: 20,
+                //     child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.center,
+                //         children:
+                //             genreIds.map((g) => Text(' $g ')).toList())),
+                // Text(overview ?? ''),
+                // Text(posterPath ?? ''),
+              ],
             ),
-          ),
-          Text('Title:$title'),
-          SizedBox(
-              height: 20,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                      viewModel.genreIds.map((g) => Text(' $g ')).toList())),
-          Text(viewModel.overview ?? ''),
-          Text(viewModel.posterPath ?? ''),
-        ],
-      ),
     );
   }
 
@@ -54,10 +62,5 @@ class MoviePanel extends StackedView<MoviePanelModel> {
   MoviePanelModel viewModelBuilder(
     BuildContext context,
   ) =>
-      MoviePanelModel(
-          title: title,
-          id: id,
-          posterPath: posterPath,
-          genreIds: genreIds,
-          overview: overview);
+      MoviePanelModel();
 }
