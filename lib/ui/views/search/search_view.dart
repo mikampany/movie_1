@@ -3,6 +3,7 @@ import 'package:movie/app/app.locator.dart';
 import 'package:movie/app/app.router.dart';
 import 'package:movie/ui/smol_widgets/movie_list.dart';
 import 'package:movie/ui/widgets/common/movie_panel/movie_panel.dart';
+import 'package:movie/ui/widgets/common/smart_movie_list/smart_movie_list.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -26,30 +27,29 @@ class SearchView extends StackedView<SearchViewModel> {
         appBar: AppBar(
           title: const Text('Search your favourite genre'),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              TextField(
-                onSubmitted: (value) {
-                  viewModel.addTag(value);
-                },
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      viewModel.search();
-                    },
-                    icon: const Icon(Icons.search),
-                  ),
+        body: Column(
+          children: [
+            TextField(
+              onSubmitted: (value) {
+                viewModel.addTag(value);
+              },
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    viewModel.search();
+                  },
+                  icon: const Icon(Icons.search),
                 ),
-                controller: viewModel.searchController,
               ),
-              Row(
-                children: viewModel.searchTags,
-              ),
-              if (viewModel.movies.isNotEmpty)
-                MovieList(movies: viewModel.movies),
-            ],
-          ),
+              controller: viewModel.searchController,
+            ),
+            Row(
+              children: viewModel.searchTags,
+            ),
+            // if (viewModel.movies.isNotEmpty)
+            //   MovieList(movies: viewModel.movies),
+            SmartMovieList(),
+          ],
         ),
       ),
     );
